@@ -4,7 +4,7 @@ import contrib from 'blessed-contrib';
 import ReactBlessedComponent from 'react-blessed/dist/ReactBlessedComponent';
 import solveClass from 'react-blessed/dist/solveClass';
 
-export function createBlessedComponent(tag, blessedElement) {
+export function createBlessedComponent(blessedElement, tag='') {
     return class extends ReactBlessedComponent {
       constructor() {
         super(tag);
@@ -27,6 +27,6 @@ export function createBlessedComponent(tag, blessedElement) {
 Object.keys(contrib).forEach(key => {
   // todo check prototype
   if (contrib.hasOwnProperty(key) && contrib[key].prototype instanceof node) {
-    exports[upperFirst(key)] = createBlessedComponent('contrib-' + key, contrib[key]);
+    exports[upperFirst(key)] = createBlessedComponent(contrib[key], 'contrib-' + key);
   }
 });
