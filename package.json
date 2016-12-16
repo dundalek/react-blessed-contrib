@@ -2,18 +2,28 @@
   "name": "react-blessed-contrib",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "babel ./src --out-dir ./dist",
+    "example": "babel-node ./examples/charts.js",
+    "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "babel-preset-react": "^6.16.0",
+    "blessed-contrib": "4.x",
     "lodash.upperfirst": "^4.3.1"
   },
   "peerDependencies": {
     "blessed": "^0.x",
-    "blessed-contrib": "4.x",
-    "react-blessed": "^0.x"
+    "react-blessed": "^0.x",
+    "react": "0.14.x"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-0": "^6.16.0"
   }
 }

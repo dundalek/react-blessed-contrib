@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import blessed from 'blessed';
 import {render} from 'react-blessed';
-import { Donut, Bar, Line } from '../index';
+import { Donut, Bar, Line } from '../src/index';
 
 const getRandomNumber = (max) => Math.floor(Math.random() * (max || 10))
 const getRandomArray = (length) => {
