@@ -5,9 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "babel ./src --out-dir ./dist",
-    "example": "babel-node ./examples/charts.js",
     "prepublish": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "basic": "babel-node ./examples/basic.js",
+    "charts": "babel-node ./examples/charts.js"
   },
   "repository": {
     "type": "git",
