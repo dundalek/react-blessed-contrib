@@ -1,7 +1,7 @@
 {
   "name": "react-blessed-contrib",
   "version": "0.1.0",
-  "description": "",
+  "description": "A wrapper for blessed-contrib widgets to be rendered with react-blessed.",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel ./src --out-dir ./dist",
@@ -9,7 +9,21 @@
     "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dundalek/react-blessed-contrib.git"
+  },
+  "keywords": [
+    "blessed",
+    "react",
+    "renderer",
+    "cli",
+    "interface",
+    "contrib",
+    "dashboard",
+    "chart"
+  ],
+  "author": "Jakub Dundalek",
   "license": "MIT",
   "dependencies": {
     "babel-preset-react": "^6.16.0",
@@ -22,6 +36,9 @@
     "react": "0.14.x"
   },
   "devDependencies": {
+    "blessed": "^0.x",
+    "react-blessed": "^0.x",
+    "react": "0.14.x",
     "babel-cli": "^6.18.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-stage-0": "^6.16.0"
