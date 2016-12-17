@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import upperFirst from 'lodash.upperfirst';
 import contrib from 'blessed-contrib';
 import ReactBlessedComponent from 'react-blessed/dist/ReactBlessedComponent';
@@ -39,6 +39,29 @@ function GridItem(props) {
   return React.createElement(props.component, props, props.children)
 }
 
+class Carousel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 0
+    };
+  }
+
+  componentDidMount() {
+    this.carousel = new contrib.carousel(this.props.children, this.props);
+    this.carousel.move = () => {
+      this.setState({
+        page: this.carousel.currPage
+      });
+    }
+    this.carousel.start();
+  }
+
+  render() {
+    return this.props.children[this.state.page];
+  }
+}
+
 Object.keys(contrib).forEach(key => {
   // todo check prototype
   if (contrib.hasOwnProperty(key) && blacklist.indexOf(key) === -1) {
@@ -47,4 +70,5 @@ Object.keys(contrib).forEach(key => {
 
   exports.Grid = Grid;
   exports.GridItem = GridItem;
+  exports.Carousel = Carousel;
 });
