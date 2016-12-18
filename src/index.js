@@ -28,7 +28,8 @@ export function createBlessedComponent(blessedElement, tag='') {
 
 function Grid(props) {
   const grid = new contrib.grid({...props, screen: { append: () => {} }});
-  return React.createElement('element', {}, props.children.map(child => {
+  const children = props.children instanceof Array ? props.children : [props.children];
+  return React.createElement('element', {}, children.map(child => {
     const props = child.props;
     const options = grid.set(props.row, props.col, props.rowSpan, props.colSpan, x => x, props.options);
     return React.cloneElement(child, options);
