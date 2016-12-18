@@ -35,8 +35,15 @@ function Grid(props) {
   }));
 }
 
-function GridItem(props) {
-  return React.createElement(props.component, props, props.children)
+class GridItem extends Component {
+  getItem() {
+    return this._reactInternalInstance._instance.refs.item;
+  }
+
+  render() {
+    const props = this.props;
+    return React.createElement(props.component, {...props, ref: 'item'}, props.children);
+  }
 }
 
 class Carousel extends Component {
