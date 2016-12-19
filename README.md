@@ -21,14 +21,15 @@ cd react-blessed-contrib
 npm install
 
 # Some examples (code is in `examples/`)
-npm run basic
+npm run dashboard
 npm run charts
+npm run basic
 ```
 ## Usage
 
 ### Using components
 
-Import components and render with React. You can mix them with native react-blessed components.
+Import components and render with React. You can mix them with native react-blessed components. Most components can be used directly as shown in the example. Refer to following sections to see how to use layout components like Grid and Carousel.
 
 ```js
 import React, { Component } from 'react';
@@ -69,6 +70,43 @@ const screen = blessed.screen();
 const component = render(<App />, screen);
 ```
 
+### Grid
+
+Pass in children components to use a grid layout:
+
+```js
+import { Grid, Map } from 'react-blessed-contrib';
+
+<Grid rows={12} cols={12}>
+  <Map row={0} col={0} rowSpan={4} colSpan={4} label="World Map" />
+  <box row={4} col={4} rowSpan={4} colSpan={4}>My Box</box>
+</Grid>
+```
+
+In case there would be name conflicts with props (`row`, `col`, `rowSpan`, `colSpan`), you can use alternative notation:
+
+```js
+import { Grid, GridItem, Map } from 'react-blessed-contrib';
+
+<Grid rows={12} cols={12}>
+  <GridItem row={0} col={0} rowSpan={4} colSpan={4} component={Map} options={{label: 'World Map'}} />
+  <GridItem row={4} col={4} rowSpan={4} colSpan={4} component={'box'} options={{content: 'My Box'}} />
+</Grid>
+```
+
+### Carousel
+
+Pass in subcomponents as children. Refer to `examples/carousel.js` for full example.
+
+```js
+import { Carousel } from 'react-blessed-contrib';
+
+<Carousel interval={3000} controlKeys={true} screen={screen}>
+  <Page1 />
+  <Page2 />
+</Carousel>
+```
+
 ### Wrapping a custom blessed widget
 
 Say you have a custom blessed widget:
@@ -91,3 +129,10 @@ render(<MyBlessedWidget />, screen);
 ## License
 
 MIT
+
+## Resources
+
+Useful resources for learning more about React internals:
+
+- https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html
+- http://goshakkk.name/react-custom-renderers/
