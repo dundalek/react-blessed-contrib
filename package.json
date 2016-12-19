@@ -1,6 +1,6 @@
 {
   "name": "react-blessed-contrib",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "A wrapper for blessed-contrib widgets to be rendered with react-blessed.",
   "main": "dist/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "basic": "babel-node ./examples/basic.js",
     "charts": "babel-node ./examples/charts.js",
-    "dashboard": "babel-node ./examples/dashboard.js",
+    "dashboard": "babel-node ./examples/dashboard.js"
   },
   "repository": {
     "type": "git",

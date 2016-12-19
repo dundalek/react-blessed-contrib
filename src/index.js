@@ -27,6 +27,7 @@ export function createBlessedComponent(blessedElement, tag='') {
     }
 }
 
+// Treat Markdown in a special way so that text can be passed as a child content
 class Markdown extends ReactBlessedComponent {
   constructor() {
     super('contrib-markdown');
@@ -49,6 +50,7 @@ class Markdown extends ReactBlessedComponent {
     return node;
   }
 
+  // Override mountComponent so that children are ignored
   mountComponent(rootID, transaction, context) {
     this._rootNodeID = rootID;
 
@@ -65,6 +67,7 @@ class Markdown extends ReactBlessedComponent {
   }
 }
 
+// We stub methods for contrib.grid to let it compute params for us which we then render in the React way
 function Grid(props) {
   const grid = new contrib.grid({...props, screen: { append: () => {} }});
   const children = props.children instanceof Array ? props.children : [props.children];
@@ -86,6 +89,7 @@ class GridItem extends Component {
   }
 }
 
+// We let the contrib.carousel manage state, re-rendering happens via move method that triggers component update
 class Carousel extends Component {
   constructor(props) {
     super(props);
