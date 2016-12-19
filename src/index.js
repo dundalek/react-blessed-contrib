@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import upperFirst from 'lodash.upperfirst';
 import contrib from 'blessed-contrib';
 import ReactBlessedComponent from 'react-blessed/dist/ReactBlessedComponent';
+import ReactBlessedIDOperations from 'react-blessed/dist/ReactBlessedIDOperations';
 import solveClass from 'react-blessed/dist/solveClass';
 
-const blacklist = [ 'OutputBuffer', 'InputBuffer', 'createScreen', 'serverError', 'grid' ];
+const blacklist = [ 'OutputBuffer', 'InputBuffer', 'createScreen', 'serverError', 'grid', 'carousel', 'markdown' ];
 
 export function createBlessedComponent(blessedElement, tag='') {
     return class extends ReactBlessedComponent {
@@ -24,6 +25,44 @@ export function createBlessedComponent(blessedElement, tag='') {
         return node;
       }
     }
+}
+
+class Markdown extends ReactBlessedComponent {
+  constructor() {
+    super('contrib-markdown');
+  }
+
+  mountNode(parent, element) {
+    const {props} = element,
+    {children, ...options} = props;
+
+    let opts = options;
+    if (typeof children === 'string' && !opts.markdown) {
+      opts.markdown = children;
+    }
+
+    const node = contrib.markdown(solveClass(opts));
+
+    node.on('event', this._eventListener);
+    parent.append(node);
+
+    return node;
+  }
+
+  mountComponent(rootID, transaction, context) {
+    this._rootNodeID = rootID;
+
+    // Mounting blessed node
+    const node = this.mountNode(
+      ReactBlessedIDOperations.getParent(rootID),
+      this._currentElement
+    );
+
+    ReactBlessedIDOperations.add(rootID, node);
+
+    // Rendering the screen
+    ReactBlessedIDOperations.screen.debouncedRender();
+  }
 }
 
 function Grid(props) {
@@ -79,4 +118,5 @@ Object.keys(contrib).forEach(key => {
   exports.Grid = Grid;
   exports.GridItem = GridItem;
   exports.Carousel = Carousel;
+  exports.Markdown = Markdown;
 });
