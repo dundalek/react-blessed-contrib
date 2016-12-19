@@ -1,3 +1,5 @@
+// Adapted from https://github.com/xicombd/react-blessed/blob/blessed-contrib/examples/contrib.jsx
+
 import React, {Component} from 'react';
 import blessed from 'blessed';
 import {render} from 'react-blessed';

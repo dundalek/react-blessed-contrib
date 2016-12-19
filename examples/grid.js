@@ -1,6 +1,7 @@
+// Adapted from https://github.com/yaronn/blessed-contrib/blob/master/examples/grid.js
+
 import React, { Component } from 'react';
 import blessed from 'blessed';
-import contrib from 'blessed-contrib';
 import { render } from 'react-blessed';
 import { Map, Grid, GridItem } from '../src/index';
 

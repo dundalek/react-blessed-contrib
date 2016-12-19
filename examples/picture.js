@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import blessed from 'blessed';
-import contrib from 'blessed-contrib';
 import { render } from 'react-blessed';
 import { Picture } from '../src/index';
 

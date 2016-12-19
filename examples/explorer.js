@@ -1,8 +1,9 @@
+// Adapted from https://github.com/yaronn/blessed-contrib/blob/master/examples/explorer.js
+
 import fs from 'fs';
 import path from 'path';
 import React, {Component} from 'react';
 import blessed from 'blessed';
-import contrib from 'blessed-contrib';
 import {render} from 'react-blessed';
 import { Grid, GridItem, Tree, Table } from '../src/index';
 

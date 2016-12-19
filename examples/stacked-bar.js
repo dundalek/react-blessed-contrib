@@ -1,3 +1,5 @@
+// Adapted from https://github.com/yaronn/blessed-contrib/blob/master/examples/stacked-bar.js
+
 import React, { Component } from 'react';
 import blessed from 'blessed';
 import { render } from 'react-blessed';
