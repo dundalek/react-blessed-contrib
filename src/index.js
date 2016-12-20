@@ -71,7 +71,7 @@ class Markdown extends ReactBlessedComponent {
 function Grid(props) {
   const grid = new contrib.grid({...props, screen: { append: () => {} }});
   const children = props.children instanceof Array ? props.children : [props.children];
-  return React.createElement('element', {}, children.map(child => {
+  return React.createElement(props.component || 'element', {}, children.map(child => {
     const props = child.props;
     const options = grid.set(props.row, props.col, props.rowSpan, props.colSpan, x => x, props.options);
     return React.cloneElement(child, options);
