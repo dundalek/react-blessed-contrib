@@ -1,9 +1,5 @@
 // Adapted from https://github.com/yaronn/blessed-contrib/blob/master/examples/explorer.js
 
-// This is an experiment to make the Tree widget load children asynchronously.
-// However, due to the Tree's current implementation it has very bad performance.
-// Learn more at https://github.com/yaronn/blessed-contrib/issues/44
-
 import fs from 'fs';
 import path from 'path';
 import React, {Component} from 'react';
@@ -13,6 +9,20 @@ import { Grid, GridItem, Tree, Table } from '../src/index';
 
 const promisify = func => (...args) => new Promise((resolve, reject) =>
   func(...args, (err, result) => err ? reject(err) : resolve(result)));
+
+var explorer = {
+  name: '/',
+  extended: true,
+  // Custom function used to recursively determine the node path
+  getPath: function(self) {
+    // If we don't have any parent, we are at tree root, so return the base case
+    if (!self.parent)
+      return '';
+
+    // Get the parent node path and add this node name
+    return self.parent.getPath(self.parent) + '/' + self.name;
+  },
+};
 
 async function loadChildren(self, cb) {
   var result = {};
@@ -32,7 +42,7 @@ async function loadChildren(self, cb) {
           name: child,
           getPath: self.getPath,
           extended: false,
-          children: self.children
+          children: { __placeholder__: { name: 'Loading...' } }
         };
       } else {
         // Otherwise children is not set (you can also set it to "{}" or "null" if you want)
@@ -45,43 +55,9 @@ async function loadChildren(self, cb) {
     }
   } catch (e) {}
 
-  self.childrenContent = result;
+  self.childrenContent = self.children = result;
   cb();
 }
-
-function createTree(cb) {
-  //file explorer
-  var explorer = {
-    name: '/',
-    extended: true,
-    // Custom function used to recursively determine the node path
-    getPath: function(self) {
-      // If we don't have any parent, we are at tree root, so return the base case
-      if (!self.parent)
-        return '';
-
-      // Get the parent node path and add this node name
-      return self.parent.getPath(self.parent) + '/' + self.name;
-    },
-    // Child generation function
-    children: function(self) {
-      var result = {};
-
-      // childrenContent is a property filled with self.children() result
-      // on tree generation (tree.setData() call)
-      if (!self.childrenContent) {
-        loadChildren(self, cb);
-      } else {
-        result = self.childrenContent;
-      }
-
-      return result;
-    }
-  }
-
-  return explorer;
-}
-
 
 class App extends Component {
   constructor() {
@@ -94,10 +70,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.explorer = createTree(() => {
-      this.refs.tree.setData(this.explorer);
-      screen.render();
-    });
     this.props.screen.key(['tab'], (ch, key) => {
       const tree = this.refs.tree;
       const table = this.refs.table;
@@ -106,8 +78,8 @@ class App extends Component {
       else
         tree.focus();
     });
-    this.refs.tree.setData(this.explorer);
     this.refs.tree.focus();
+    loadChildren(explorer, this._reRender);
   }
 
   render() {
@@ -139,7 +111,13 @@ class App extends Component {
     );
   }
 
+  _reRender = () => {
+    this.refs.tree.setData(explorer);
+    screen.render();
+  }
+
   _onSelect = async (node) => {
+    loadChildren(node, this._reRender);
     var path = node.getPath(node);
     var data = [];
 
