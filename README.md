@@ -7,7 +7,7 @@ A wrapper for [blessed-contrib](https://github.com/yaronn/blessed-contrib) widge
 You can install `react-blessed-contrib` through npm:
 
 ```bash
-npm install react@0.14.0 blessed react-blessed
+npm install react blessed react-blessed
 npm install react-blessed-contrib
 ```
 
@@ -24,7 +24,11 @@ npm install
 npm run dashboard
 npm run charts
 npm run basic
+
+# Run any example with babel-node
+./node_modules/.bin/babel-node examples/charts.js
 ```
+
 ## Usage
 
 ### Using components
