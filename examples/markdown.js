@@ -8,7 +8,7 @@ import chalk from 'chalk';
 
 class App extends Component {
   componentDidMount() {
-    this.refs.markdown.setMarkdown('# Hello \n Testing `refs`.');
+    this.refs.markdown.widget.setMarkdown('# Hello \n Testing `refs`.');
   }
 
   render() {

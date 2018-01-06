@@ -7,7 +7,7 @@ import { Carousel, Map, Grid, GridItem, Line } from '../src/index';
 
 class Info extends Component {
   render() {
-    return <box top="80%" left="10%">click right-left arrows or wait 3 seconds for the next layout in the carousel</box>;
+    return <box top="80%" left="10%">Press right-left arrows or wait 3 seconds for the next layout in the carousel</box>;
   }
 }
 

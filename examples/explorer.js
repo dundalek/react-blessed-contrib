@@ -71,21 +71,21 @@ class App extends Component {
 
   componentDidMount() {
     this.props.screen.key(['tab'], (ch, key) => {
-      const tree = this.refs.tree;
-      const table = this.refs.table;
+      const tree = this.refs.tree.widget;
+      const table = this.refs.table.widget;
       if(screen.focused == tree.rows)
         table.focus();
       else
         tree.focus();
     });
-    this.refs.tree.setData(explorer);
-    this.refs.tree.focus();
+    this.refs.tree.widget.setData(explorer);
+    this.refs.tree.widget.focus();
   }
 
   render() {
     return (
       <Grid rows={1} cols={2}>
-        <Tree ref="tree" row={0} col={0} rowSpan={1} colSpan={1} options={{
+        <Tree key="tree" ref="tree" row={0} col={0} rowSpan={1} colSpan={1} options={{
           style: {
             text: "red"
           },
@@ -95,7 +95,7 @@ class App extends Component {
           label: 'Filesystem Tree',
           onSelect: this._onSelect
         }}/>
-        <Table ref="table" row={0} col={1} rowSpan={1} colSpan={1} options={{
+        <Table key="table" ref="table" row={0} col={1} rowSpan={1} colSpan={1} options={{
           keys: true,
           fg: 'green',
           label: 'Informations',

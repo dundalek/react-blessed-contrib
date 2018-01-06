@@ -106,7 +106,7 @@ class App extends Component {
       this.setState({tableData: generateTable() });
     }, 3000);
 
-    const log = this.refs.log;
+    const log = this.refs.log.widget;
     setInterval(function() {
        var rnd = Math.round(Math.random()*2)
        if (rnd==0) log.log('starting process ' + commands[Math.round(Math.random()*(commands.length-1))])
@@ -115,7 +115,7 @@ class App extends Component {
        screen.render()
     }, 500);
 
-    const sparkline = this.refs.sparkline;
+    const sparkline = this.refs.sparkline.widget;
     //set spark dummy data
     var spark1 = [1,2,5,2,1,5,1,2,5,2,1,5,4,4,5,4,1,5,1,2,5,2,1,5,1,2,5,2,1,5,1,2,5,2,1,5]
     var spark2 = [4,4,5,4,1,5,1,2,5,2,1,5,4,4,5,4,1,5,1,2,5,2,1,5,1,2,5,2,1,5,1,2,5,2,1,5]
@@ -130,7 +130,7 @@ class App extends Component {
     }
 
     //set map dummy markers
-    const map = this.refs.map;
+    const map = this.refs.map.widget;
     var marker = true
     setInterval(function() {
        if (marker) {
@@ -154,7 +154,7 @@ class App extends Component {
       this.setState({ errorsLineData: getLineData([errorsData]) });
    }, 1500);
 
-   const lcdLineOne = this.refs.lcdLineOne;
+   const lcdLineOne = this.refs.lcdLineOne.widget;
    setInterval(() => {
      this.setState({ lcdValue: Math.round(Math.random() * 100) });
      lcdLineOne.setDisplay(this.state.lcdValue + lcdText[this.state.lcdValue % 12]);
@@ -169,7 +169,7 @@ class App extends Component {
       this.setState({ donutPct: this.state.donutPct + 0.01 });
    }, 500);
 
-    this.refs.table.focus();
+    this.refs.table.widget.focus();
   }
 
   render() {

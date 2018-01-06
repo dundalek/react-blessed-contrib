@@ -71,14 +71,14 @@ class App extends Component {
 
   componentDidMount() {
     this.props.screen.key(['tab'], (ch, key) => {
-      const tree = this.refs.tree;
-      const table = this.refs.table;
+      const tree = this.refs.tree.widget;
+      const table = this.refs.table.widget;
       if(screen.focused == tree.rows)
         table.focus();
       else
         tree.focus();
     });
-    this.refs.tree.focus();
+    this.refs.tree.widget.focus();
     loadChildren(explorer, this._reRender);
   }
 
@@ -112,7 +112,7 @@ class App extends Component {
   }
 
   _reRender = () => {
-    this.refs.tree.setData(explorer);
+    this.refs.tree.widget.setData(explorer);
     screen.render();
   }
 
