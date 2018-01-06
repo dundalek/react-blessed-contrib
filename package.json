@@ -1,6 +1,6 @@
 {
   "name": "react-blessed-contrib",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A wrapper for blessed-contrib widgets to be rendered with react-blessed.",
   "main": "dist/index.js",
   "scripts": {
