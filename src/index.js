@@ -55,7 +55,7 @@ function Grid(props) {
   const children = props.children instanceof Array ? props.children : [props.children];
   return React.createElement(props.component || 'element', {}, children.map((child, key) => {
     const props = child.props;
-    const options = grid.set(props.row, props.col, props.rowSpan, props.colSpan, x => x, props.options);
+    const options = grid.set(props.row, props.col, props.rowSpan || 1, props.colSpan || 1, x => x, props.options);
     options.key = key;
     return React.cloneElement(child, options);
   }));
