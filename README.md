@@ -81,18 +81,20 @@ Pass in children components to use a grid layout:
 ```js
 import { Grid, Map } from 'react-blessed-contrib';
 
-<Grid rows={1} cols={2}>
-  <Map col={0} label="World Map" />
-  <box col={1}>My Box</box>
+<Grid rows={12} cols={12}>
+  <Map row={0} col={0} rowSpan={4} colSpan={4} label="World Map" />
+  <box row={4} col={4} rowSpan={4} colSpan={4}>My Box</box>
 </Grid>
 ```
+
+If you don't specify `rowSpan` or `colSpan` then `1` is used as a default:
 
 ```js
 import { Grid, Map } from 'react-blessed-contrib';
 
-<Grid rows={12} cols={12}>
-  <Map row={0} col={0} rowSpan={4} colSpan={4} label="World Map" />
-  <box row={4} col={4} rowSpan={4} colSpan={4}>My Box</box>
+<Grid rows={1} cols={2}>
+  <Map col={0} label="World Map" />
+  <box col={1}>My Box</box>
 </Grid>
 ```
 
