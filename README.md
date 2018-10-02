@@ -35,6 +35,8 @@ npm run basic
 
 Import components and render with React. You can mix them with native react-blessed components. Most components can be used directly as shown in the example. Refer to following sections to see how to use layout components like Grid and Carousel.
 
+**Note:** When using refs, the actual blessed widget instance (which you use to call methods like `scrollTo`) is located on the `widget` property of the component ref that's passed to your ref callback. See the ref on the `Bar` component below for a usage example.
+
 ```js
 import React, { Component } from 'react';
 import blessed from 'blessed';
@@ -52,6 +54,7 @@ class App extends Component {
            border={{type: 'line'}}
            style={{border: {fg: 'blue'}}}>
         <Bar
+          ref={r => this.barRef = r ? r.widget : null}
           label="Server Utilization (%)"
           barWidth={4}
           barSpacing={6}
